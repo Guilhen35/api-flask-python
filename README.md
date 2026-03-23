@@ -8,10 +8,12 @@ Este projeto foi criado com foco em aprendizado, para entender como funciona uma
 
 ## ✨ Funcionalidades
 
-- Rota inicial para verificar se a API esta funcionando
-- Listagem de produtos com metodo `GET`
-- Cadastro de produtos com metodo `POST`
-- Retorno de respostas em formato JSON
+- Verificar se a API esta funcionando
+- Listar produtos com GET
+- Adicionar produtos com POST
+- Atualizar produtos com PUT
+- Remover produtos com DELETE
+- Retornar dados em formato JSON
 
 ## 🛠 Tecnologias utilizadas
 
@@ -20,90 +22,53 @@ Este projeto foi criado com foco em aprendizado, para entender como funciona uma
 
 ## 📁 Estrutura do projeto
 
-```text
-api-flask-python/
-├── main.py
-├── teste_api.http
-└── .gitignore
-▶️ Como executar o projeto
-Clone o repositorio ou baixe os arquivos.
-Abra o projeto no PyCharm.
-Crie ou ative o ambiente virtual.
-Instale o Flask com o comando:
-pip install flask
-Execute o arquivo main.py.
-A API sera iniciada em:
+- `main.py`
+- `teste_api.http`
+- `.gitignore`
 
-http://127.0.0.1:5000
-🌐 Rotas disponiveis
-GET /
-Retorna uma mensagem informando que a API esta funcionando.
+## ▶️ Como executar
 
-Exemplo de resposta:
+1. Abra o projeto no PyCharm
+2. Ative o ambiente virtual
+3. Instale o Flask com `pip install flask`
+4. Execute o arquivo `main.py`
 
-{
-  "mensagem": "API Flask funcionando com sucesso!"
-}
-GET /produtos
-Retorna a lista de produtos cadastrados.
+A API sera iniciada em `http://127.0.0.1:5000`
 
-Exemplo de resposta:
+## 🌐 Rotas da API
 
-[
-  {
-    "id": 1,
-    "nome": "Mouse",
-    "preco": 50
-  },
-  {
-    "id": 2,
-    "nome": "Teclado",
-    "preco": 120
-  }
-]
-POST /produtos
-Adiciona um novo produto a lista.
+- `GET /` verifica se a API esta online
+- `GET /produtos` lista os produtos
+- `POST /produtos` adiciona um produto
+- `PUT /produtos/<id>` atualiza um produto existente
+- `DELETE /produtos/<id>` remove um produto existente
 
-Exemplo de envio:
+## 🧪 Exemplos de teste no PowerShell
 
-{
-  "nome": "Monitor",
-  "preco": 900
-}
-Exemplo de resposta:
+Adicionar produto:
 
-{
-  "mensagem": "Produto adicionado com sucesso!",
-  "produto": {
-    "id": 3,
-    "nome": "Monitor",
-    "preco": 900
-  }
-}
-🧪 Como testar
-Voce pode testar a API de diferentes formas:
+`Invoke-RestMethod -Method Post -Uri "http://127.0.0.1:5000/produtos" -ContentType "application/json" -Body '{"nome":"Monitor","preco":900}'`
 
-Pelo navegador, nas rotas GET
-Pelo PowerShell usando Invoke-RestMethod
-Pelo arquivo teste_api.http no PyCharm, se sua versao permitir
-Exemplo no PowerShell:
+Atualizar produto:
 
-Invoke-RestMethod -Method Post -Uri "http://127.0.0.1:5000/produtos" -ContentType "application/json" -Body '{"nome":"Monitor","preco":900}'
+`Invoke-RestMethod -Method Put -Uri "http://127.0.0.1:5000/produtos/2" -ContentType "application/json" -Body '{"nome":"Teclado Gamer","preco":180}'`
 
+Remover produto:
 
-📚 Aprendizados praticados
+`Invoke-RestMethod -Method Delete -Uri "http://127.0.0.1:5000/produtos/1"`
 
-Criacao de API com Flask
-Uso de rotas
-Metodos GET e POST
-Manipulacao de JSON
-Teste de endpoints localmente
-Uso de Git e GitHub para versionamento
+## 📚 Aprendizados praticados
 
+- Criacao de API com Flask
+- Uso de rotas HTTP
+- Metodos GET, POST, PUT e DELETE
+- Manipulacao de JSON
+- Testes locais no navegador e PowerShell
+- Uso de Git e GitHub
 
-🔮 Melhorias futuras
+## 🔮 Melhorias futuras
 
-Adicionar rotas PUT e DELETE
-Validar melhor os dados enviados
-Separar as rotas em arquivos diferentes
-Integrar com banco de dados
+- Validar melhor os dados enviados
+- Separar as rotas em arquivos diferentes
+- Integrar com banco de dados
+- Criar uma interface web para consumir a API
