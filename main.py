@@ -27,6 +27,36 @@ def listar_produtos():
 def adicionar_produto():
     dados = request.get_json()
 
+# Atualiza um produto existente pelo id
+@app.route("/produtos/<int:id>", methods=["PUT"])
+def atualizar_produto(id):
+    dados = request.get_json()
+
+    for produto in produtos:
+        if produto['id'] == id:
+            produto['nome'] = dados['nome']
+            produto['preco'] = dados['preco']
+
+            return jsonify({"mensagem": "Produto atualizado com sucesso!", "produto": produto})
+    return jsonify({'mensagem': 'Produto não encontrado!'}),404
+
+
+# Remove um produto existente pelo id
+@app.route("/produtos/<int:id>", methods=["DELETE"])
+def deletar_produto(id):
+    for produto in produtos:
+        if produto["id"] == id:
+            produtos.remove(produto)
+
+            return jsonify({"mensagem": "Produto removido com sucesso!"})
+
+    return jsonify({"mensagem": "Produto nao encontrado"}), 404
+
+
+
+
+
+
     novo_produto = {
         "id": len(produtos) + 1,
         "nome": dados["nome"],
